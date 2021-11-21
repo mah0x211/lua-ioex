@@ -5,7 +5,7 @@ source = {
     url = 'git+https://github.com/mah0x211/lua-ioex.git',
 }
 description = {
-    summary = 'get the file descriptor from the lua file stream.',
+    summary = 'additional features to the io module.',
     homepage = 'https://github.com/mah0x211/lua-ioex',
     license = 'MIT/X11',
     maintainer = 'Masatoshi Fukunaga',
@@ -24,6 +24,10 @@ build = {
         ['ioex.fileno'] = {
             sources = { 'src/fileno.c' },
             incdirs = { 'deps/lauxhlib' },
-        }
+        },
+        ['ioex.isfile'] = {
+            sources = { 'src/isfile.c' },
+            incdirs = { 'deps/lauxhlib' },
+        },
     }
 }

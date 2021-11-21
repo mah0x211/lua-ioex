@@ -29,5 +29,6 @@ end
 -- additional functions
 _M.file = require('ioex.file')
 _M.fileno = require('ioex.fileno')
+_M.isfile = require('ioex.isfile')
 
 return _M
