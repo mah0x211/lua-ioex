@@ -35,7 +35,7 @@ function testcase.file()
 
     -- test that wraps a fd to new lua file handle
     local fd = ioex.fileno(f)
-    local newf = assert( ioex.file(fd, 'a+'))
+    local newf = assert(ioex.file(fd, 'a+'))
     assert.not_equal(ioex.fileno(newf), fd)
     f:close()
 
@@ -45,4 +45,26 @@ function testcase.file()
     assert.equal(newf:read('*a'), 'hello world!')
 
     newf:close()
+end
+
+function testcase.isfile()
+    local f = assert(io.open(FILENAME, 'r+'))
+    local mt = getmetatable(f)
+
+    -- test that returns true
+    assert.is_true(ioex.isfile(f))
+
+    -- test that returns false
+    local fake = setmetatable({}, mt)
+    for _, v in ipairs({
+        fake,
+        'foo',
+        1,
+        {},
+        function()
+        end,
+    }) do
+        assert.is_false(ioex.isfile(v))
+    end
+    setmetatable(fake, nil)
 end

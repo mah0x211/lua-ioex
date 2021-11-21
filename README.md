@@ -16,13 +16,14 @@ luarocks install ioex
 `ioex` module contains the following functions;
 
 - functions of Lua's built-in `io` module
-- functions of `ioex.fileno` module
-- functions of `ioex.file` module
+- `ioex.fileno` function
+- `ioex.file` function
+- `ioex.isfile` function
 
 
 ## fd = ioex.fileno( f )
 
-get the file descriptor from the file handle.
+get the file descriptor from the lua file handle.
 
 **Parameters**
 
@@ -49,7 +50,7 @@ print(io.fileno(f))
 
 ## f, err = ioex.file( fd )
 
-create the file handle from the file descriptor.
+create the lua file handle from the file descriptor.
 
 **Parameters**
 
@@ -71,5 +72,34 @@ local fd = io.fileno(f)
 local newf = assert(io.file(fd))
 -- file descriptor is duplicated with the `dup` function
 print(io.fileno(newf)) 
+```
+
+
+## ok = ioex.isfile( f )
+
+determines whether `f` is the lua file handle or not.
+
+**Parameters**
+
+- `f:any`: any value.
+
+**Returns**
+
+- `ok:boolean`: `true` if `f` is the lua file handle.
+
+**e.g.**
+
+```lua
+local io = require('ioex')
+local f = assert(io.open('./test.txt', 'w'))
+local mt = getmetatable(f)
+local fake = setmetatable({}, mt)
+
+-- true
+print(io.isfile(f)) 
+-- false
+print(io.isfile(fake))
+print(io.isfile('foo'))
+print(io.isfile(1))
 ```
 

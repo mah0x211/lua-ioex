@@ -1,8 +1,9 @@
 rockspec_format = '3.0'
 package = 'ioex'
-version = 'dev-1'
+version = '0.2.0-1'
 source = {
     url = 'git+https://github.com/mah0x211/lua-ioex.git',
+    tag = 'v0.2.0',
 }
 description = {
     summary = 'additional features to the io module.',
