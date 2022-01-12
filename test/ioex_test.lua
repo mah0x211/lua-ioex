@@ -1,5 +1,4 @@
 local ioex = require('ioex')
-local assert = require('assertex')
 local testcase = require('testcase')
 
 local FILENAME = 'testfile.txt'
