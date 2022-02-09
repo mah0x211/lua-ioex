@@ -27,14 +27,14 @@ function testcase.fileno()
     assert.equal(ioex.fileno(f), -1)
 end
 
-function testcase.file()
+function testcase.tofile()
     local f = assert(io.open(FILENAME, 'r+'))
     assert(f:write('hello'))
     assert(f:flush())
 
     -- test that wraps a fd to new lua file handle
     local fd = ioex.fileno(f)
-    local newf = assert(ioex.file(fd, 'a+'))
+    local newf = assert(ioex.tofile(fd, 'a+'))
     assert.not_equal(ioex.fileno(newf), fd)
     f:close()
 

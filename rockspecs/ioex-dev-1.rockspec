@@ -17,8 +17,8 @@ build = {
     type = 'builtin',
     modules = {
         ioex = 'ioex.lua',
-        ['ioex.file'] = {
-            sources = { 'src/file.c' },
+        ['ioex.tofile'] = {
+            sources = { 'src/tofile.c' },
             incdirs = { 'deps/lauxhlib' },
         },
         ['ioex.fileno'] = {

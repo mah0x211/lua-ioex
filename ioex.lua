@@ -27,7 +27,8 @@ for k, v in pairs(io) do
 end
 
 -- additional functions
-_M.file = require('ioex.file')
+_M.file = require('ioex.tofile') -- deprecate
+_M.tofile = require('ioex.tofile')
 _M.fileno = require('ioex.fileno')
 _M.isfile = require('ioex.isfile')
 
