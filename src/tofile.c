@@ -21,11 +21,10 @@
  *
  */
 #include <errno.h>
+#include <lauxhlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
-// lua
-#include "lauxhlib.h"
 
 static inline FILE *fd2fp(int fd, const char *mode)
 {
