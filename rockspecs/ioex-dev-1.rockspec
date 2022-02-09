@@ -11,23 +11,21 @@ description = {
     maintainer = 'Masatoshi Fukunaga',
 }
 dependencies = {
-    'lua >= 5.1'
+    'lua >= 5.1',
+    'lauxhlib >= 0.1.0',
 }
 build = {
     type = 'builtin',
     modules = {
         ioex = 'ioex.lua',
-        ['ioex.file'] = {
-            sources = { 'src/file.c' },
-            incdirs = { 'deps/lauxhlib' },
+        ['ioex.tofile'] = {
+            sources = { 'src/tofile.c' },
         },
         ['ioex.fileno'] = {
             sources = { 'src/fileno.c' },
-            incdirs = { 'deps/lauxhlib' },
         },
         ['ioex.isfile'] = {
             sources = { 'src/isfile.c' },
-            incdirs = { 'deps/lauxhlib' },
         },
     }
 }

@@ -21,11 +21,10 @@
  *
  */
 #include <errno.h>
+#include <lauxhlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
-// lua
-#include "lauxhlib.h"
 
 static inline FILE *fd2fp(int fd, const char *mode)
 {
@@ -61,7 +60,7 @@ static int closefp(lua_State *L)
 #endif
 }
 
-static int file_lua(lua_State *L)
+static int tofile_lua(lua_State *L)
 {
     int fd           = lauxh_checkinteger(L, 1);
     const char *mode = lauxh_checkstring(L, 2);
@@ -93,8 +92,8 @@ static int file_lua(lua_State *L)
     return 1;
 }
 
-LUALIB_API int luaopen_ioex_file(lua_State *L)
+LUALIB_API int luaopen_ioex_tofile(lua_State *L)
 {
-    lua_pushcfunction(L, file_lua);
+    lua_pushcfunction(L, tofile_lua);
     return 1;
 }

@@ -20,8 +20,7 @@
  *  DEALINGS IN THE SOFTWARE.
  *
  */
-// lua
-#include "lauxhlib.h"
+#include <lauxhlib.h>
 
 static int fileno_lua(lua_State *L)
 {
