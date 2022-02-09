@@ -63,7 +63,7 @@ static int closefp(lua_State *L)
 static int tofile_lua(lua_State *L)
 {
     int fd           = lauxh_checkinteger(L, 1);
-    const char *mode = lauxh_checkstring(L, 2);
+    const char *mode = lauxh_optstring(L, 2, "r");
 
 #if LUA_VERSION_NUM >= 502
     luaL_Stream *p = lua_newuserdata(L, sizeof(luaL_Stream));
@@ -78,7 +78,8 @@ static int tofile_lua(lua_State *L)
     if (*fp == NULL) {
         lua_pushnil(L);
         lua_pushstring(L, strerror(errno));
-        return 2;
+        lua_pushinteger(L, errno);
+        return 3;
     }
 
     lauxh_setmetatable(L, LUA_FILEHANDLE);

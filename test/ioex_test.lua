@@ -1,5 +1,6 @@
 local ioex = require('ioex')
 local testcase = require('testcase')
+local errno = require('error').errno
 
 local FILENAME = 'testfile.txt'
 
@@ -42,8 +43,18 @@ function testcase.tofile()
     assert(newf:write(' world!'))
     assert(newf:seek('set', 0))
     assert.equal(newf:read('*a'), 'hello world!')
-
     newf:close()
+
+    -- test that convert to file without mode argument
+    f = assert(io.open(FILENAME, 'r+'))
+    fd = ioex.fileno(f)
+    newf = assert(ioex.tofile(fd))
+    newf:close()
+
+    -- test that return error if mode is invalid
+    local _, err, eno = ioex.tofile(fd, 'hello')
+    assert.is_string(err)
+    assert.equal(errno[eno], errno.EINVAL)
 end
 
 function testcase.isfile()

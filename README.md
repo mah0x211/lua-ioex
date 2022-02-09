@@ -48,18 +48,26 @@ print(io.fileno(f))
 ```
 
 
-## f, err = ioex.file( fd )
+## f, err, errno = ioex.tofile( fd [, mode] )
 
 create the lua file handle from the file descriptor.
 
 **Parameters**
 
 - `fd:integer`: the file descriptor.
+- `mode:string`: the mode string can be any of the following:
+  - `'r'`: read mode (the default);
+  - `'w'`: write mode;
+  - `'a'`: append mode;
+  - `'r+'`: update mode, all previous data is preserved;
+  - `'w+'`: update mode, all previous data is erased;
+  - `'a+'`: append update mode, previous data is preserved, writing is only allowed at the end of file.
 
 **Returns**
 
 - `f:file`: lua file handle.
-- `err:string`: error string
+- `err:string`: error string.
+- `errno:integer`: error number.
 
 **e.g.**
 
@@ -69,7 +77,7 @@ local f = assert(io.open('./test.txt', 'w'))
 local fd = io.fileno(f)
 
 -- returns new file handle from the file descriptor
-local newf = assert(io.file(fd))
+local newf = assert(io.tofile(fd))
 -- file descriptor is duplicated with the `dup` function
 print(io.fileno(newf)) 
 ```
